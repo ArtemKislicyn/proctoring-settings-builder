@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конструктор настроек прокторинга</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&amp;display=swap">
+<style>
+:root { --blue-50: #E5F7FF; --blue-75: #E0F6FF; --blue-400: #2EC0FF; --blue-700: #0079AD; --blue-800: #00608A; --blue-900: #004B6B; --blue-1000: #00364D; --construction-25: #FCFDFD; --construction-50: #F1F6F8; --construction-100: #E3EAED; --construction-200: #CBD4D8; --construction-300: #AEB8BC; --construction-400: #859399; --construction-500: #6A7A81; --construction-600: #4F6169; --construction-700: #3A4D55; --construction-800: #2D4048; --construction-900: #21333B; --construction-1000: #1B2B32; --construction-1100: #17252B; --cool-gray-50: #F3F5F7; --cool-gray-1000: #0D233A; --green-50: #EEFCE3; --green-500: #67CA16; --green-700: #42810E; --green-800: #366A0C; --ochre-100: #FFF2D6; --ochre-400: #FFCF66; --ochre-500: #FFB92E; --ochre-800: #A36500; --ochre-900: #8A5300; --red-50: #FFF2F0; --red-500: #FF674D; --red-700: #E02200; --red-900: #8F1500; --app-bg: var(--construction-25); --surface: #FFFFFF; --surface-tint: var(--construction-50); --surface-rail: var(--cool-gray-50); --border: var(--construction-200); --border-strong: var(--construction-300); --text-900: var(--construction-900); --text-800: var(--construction-800); --text-600: var(--construction-600); --text-500: var(--construction-500); --primary: var(--blue-700); --primary-hover: var(--blue-800); --primary-tint: var(--blue-50); --primary-selected: var(--blue-75); --status-success: var(--green-700); --status-success-tint: var(--green-50); --status-success-text: var(--green-800); --status-warning: var(--ochre-500); --status-warning-tint: var(--ochre-100); --status-warning-text: var(--ochre-800); --status-danger: var(--red-700); --status-danger-tint: var(--red-50); --status-danger-text: var(--red-700); --status-info: var(--blue-700); --status-info-tint: var(--blue-50); --status-info-text: var(--blue-800); --status-neutral: var(--construction-600); --status-neutral-tint: var(--construction-50); --shadow-300: 0 1px 3px 0 hsla(198,30%,15%,.2); --shadow-200: 0 1px 3px 0 hsla(198,30%,15%,.3); --code-key: var(--blue-800); --code-str: var(--green-800); --code-num: var(--ochre-800); --code-com: var(--construction-500); --radius-100: 4px; --radius-200: 12px; --radius-pill: 16px; --sp-3: 4px; --sp-5: 8px; --sp-6: 12px; --sp-7: 16px; --sp-9: 24px; --sp-10: 32px; --sp-12: 48px; --sp-13: 64px; --header-h: 56px; --rail-w: 240px; --ease: cubic-bezier(.42,.01,.58,1); --quick: .2s; --font: 'Metropolis','Clarity City','Avenir Next','Jost',system-ui,-apple-system,sans-serif; --mono: ui-monospace,Consolas,Menlo,Monaco,monospace; color-scheme: light; }
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]) { --app-bg: var(--construction-1000); --surface: var(--construction-900); --surface-tint: var(--construction-1000); --surface-rail: var(--construction-1100); --border: var(--construction-500); --border-strong: var(--construction-300); --text-900: var(--construction-100); --text-800: var(--construction-200); --text-600: var(--construction-300); --text-500: var(--construction-500); --primary: var(--blue-400); --primary-hover: #8FDDFF; --primary-tint: var(--blue-1000); --primary-selected: var(--blue-900); --status-success: var(--green-500); --status-success-tint: var(--green-800); --status-success-text: #D0F6B1; --status-warning: var(--ochre-400); --status-warning-tint: var(--ochre-900); --status-warning-text: var(--ochre-400); --status-danger: var(--red-500); --status-danger-tint: var(--red-900); --status-danger-text: #FFCBC2; --status-info: var(--blue-400); --status-info-tint: var(--blue-800); --status-info-text: #BDEBFF; --status-neutral: var(--construction-300); --status-neutral-tint: var(--construction-700); --shadow-300: 0 1px 2px 0 hsla(0,0%,0%,.2); --shadow-200: 0 1px 2px 0 hsla(0,0%,0%,.4); --code-key: #8FDDFF; --code-str: #ACF075; --code-num: var(--ochre-400); --code-com: var(--construction-400); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --app-bg: var(--construction-1000); --surface: var(--construction-900); --surface-tint: var(--construction-1000); --surface-rail: var(--construction-1100); --border: var(--construction-500); --border-strong: var(--construction-300); --text-900: var(--construction-100); --text-800: var(--construction-200); --text-600: var(--construction-300); --text-500: var(--construction-500); --primary: var(--blue-400); --primary-hover: #8FDDFF; --primary-tint: var(--blue-1000); --primary-selected: var(--blue-900); --status-success: var(--green-500); --status-success-tint: var(--green-800); --status-success-text: #D0F6B1; --status-warning: var(--ochre-400); --status-warning-tint: var(--ochre-900); --status-warning-text: var(--ochre-400); --status-danger: var(--red-500); --status-danger-tint: var(--red-900); --status-danger-text: #FFCBC2; --status-info: var(--blue-400); --status-info-tint: var(--blue-800); --status-info-text: #BDEBFF; --status-neutral: var(--construction-300); --status-neutral-tint: var(--construction-700); --shadow-300: 0 1px 2px 0 hsla(0,0%,0%,.2); --shadow-200: 0 1px 2px 0 hsla(0,0%,0%,.4); --code-key: #8FDDFF; --code-str: #ACF075; --code-num: var(--ochre-400); --code-com: #859399; color-scheme: dark; }
+*, ::before, ::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce){
+html { scroll-behavior: auto; }
+* { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+body { margin: 0px; background: var(--app-bg); color: var(--text-800); font-family: var(--font); font-size: 14px; line-height: 20px; letter-spacing: -0.00714em; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { color: var(--text-900); margin: 0px; font-weight: 500; text-wrap: balance; }
+h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.00833em; }
+p { margin: 0px; max-width: 68ch; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 2px; }
+code { font-family: var(--mono); font-size: 0.92em; }
+.content { flex: 1 1 auto; min-width: 0px; padding: var(--sp-9); display: flex; flex-direction: column; gap: var(--sp-12); }
+.content > :first-child { margin-top: 0px; }
+section { scroll-margin-top: calc(var(--header-h) + 16px); display: flex; flex-direction: column; gap: var(--sp-7); }
+.sec-head { display: flex; flex-direction: column; gap: var(--sp-3); padding-bottom: var(--sp-5); border-bottom: 1px solid var(--border); }
+.sec-head .kicker { font-size: 10px; line-height: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--primary); }
+.btn { cursor: pointer; display: inline-flex; gap: var(--sp-5); align-items: center; justify-content: center; height: 32px; min-width: 72px; max-width: 360px; padding: 0 var(--sp-6); border: 1px solid var(--primary); border-radius: var(--radius-100); background: transparent; color: var(--primary); font-family: var(--font); font-size: 12px; font-weight: 600; line-height: 16px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; transition: background var(--quick) var(--ease),border-color var(--quick) var(--ease); }
+.btn:hover { background: var(--primary-tint); color: var(--primary-hover); border-color: var(--primary-hover); text-decoration: none; }
+.btn[disabled] { cursor: not-allowed; color: var(--construction-500); border-color: var(--border-strong); background: transparent; }
+.btn[disabled]:hover { background: transparent; }
+.btn-sm { height: 24px; font-size: 11px; letter-spacing: 0.2px; min-width: 0px; }
+.btn[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: rgb(255, 255, 255); }
+.btn[aria-pressed="true"]:hover { background: var(--primary-hover); border-color: var(--primary-hover); color: rgb(255, 255, 255); }
+:root[data-theme="dark"] .btn[aria-pressed="true"], :root[data-theme="dark"] .btn[aria-pressed="true"]:hover { color: var(--construction-1000); }
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]) .btn[aria-pressed="true"], :root:not([data-theme="light"]) .btn[aria-pressed="true"]:hover { color: var(--construction-1000); }
+}
+.code { position: relative; border: 1px solid var(--border); border-radius: var(--radius-100); background: var(--surface-tint); overflow: hidden; }
+.code-bar { display: flex; align-items: center; gap: var(--sp-5); height: 32px; padding: 0 var(--sp-6); border-bottom: 1px solid var(--border); background: var(--surface); font-size: 11px; line-height: 16px; letter-spacing: 0.2px; color: var(--text-600); }
+.code-bar .spacer { flex: 1 1 auto; }
+.code pre { margin: 0px; padding: var(--sp-6); overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 20px; color: var(--text-800); }
+.copy-btn { cursor: pointer; height: 20px; padding: 0px 8px; border: 1px solid var(--border-strong); border-radius: 2px; background: transparent; color: var(--text-600); font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; transition: color var(--quick) var(--ease),border-color var(--quick) var(--ease); }
+.copy-btn:hover { color: var(--primary); border-color: var(--primary); }
+.copy-btn.done { color: var(--status-success); border-color: var(--status-success); }
+@media (max-width: 900px){
+.content { padding: var(--sp-7); }
+}
+.builder { display: grid; grid-template-columns: minmax(0px, 1fr) minmax(320px, 420px); gap: var(--sp-7); align-items: start; }
+@media (max-width: 1180px){
+.builder { grid-template-columns: 1fr; }
+}
+.presets { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-5); padding-bottom: var(--sp-6); }
+.presets > span { font-size: 11px; font-weight: 600; letter-spacing: 0.2px; color: var(--text-600); margin-right: var(--sp-3); }
+.group { border: 1px solid var(--border); border-radius: var(--radius-100); background: var(--surface); overflow: hidden; }
+.group + .group { margin-top: var(--sp-6); }
+.group-head { width: 100%; display: flex; align-items: center; gap: var(--sp-5); min-height: 36px; padding: var(--sp-5) var(--sp-7); background: var(--surface-tint); border-width: 0px 0px 1px; border-top-style: initial; border-right-style: initial; border-left-style: initial; border-top-color: initial; border-right-color: initial; border-left-color: initial; border-image: initial; border-bottom-style: solid; border-bottom-color: transparent; cursor: pointer; text-align: left; font-family: var(--font); font-size: 14px; font-weight: 500; color: var(--text-900); }
+.group.open .group-head { border-bottom-color: var(--border); }
+.group-head .chev { display: inline-block; font-size: 9px; color: var(--text-600); transition: transform var(--quick) var(--ease); }
+.group.open .group-head .chev { transform: rotate(90deg); }
+.group-head .cnt { margin-left: auto; display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 16px; padding: 0px 5px; border: 1px solid var(--border-strong); border-radius: var(--radius-pill); font-size: 10px; font-weight: 600; color: var(--text-600); }
+.group-body { display: none; flex-direction: column; }
+.group.open .group-body { display: flex; }
+.group-body > .opt { display: flex; flex-direction: column; gap: var(--sp-3); padding: var(--sp-6) var(--sp-7); border-top: 1px solid var(--border); }
+.group-body > .opt:first-child { border-top: 0px; }
+.group-body > .opt.changed { background: var(--primary-tint); box-shadow: inset 3px 0 0 var(--primary); }
+.opt-top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-5); }
+.opt-key { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--text-900); }
+.opt-type, .opt-def { font-size: 10px; line-height: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-600); }
+.opt-def { margin-left: auto; font-family: var(--mono); text-transform: none; letter-spacing: 0px; }
+.opt-label { font-size: 14px; line-height: 20px; color: var(--text-900); }
+.opt-hint { font-size: 13px; line-height: 18px; color: var(--text-600); max-width: 74ch; }
+.opt-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-5); padding-top: var(--sp-3); }
+.opt-ctl input[type="text"], .opt-ctl input[type="number"], .opt-ctl select, .opt-ctl textarea { height: 32px; padding: 0 var(--sp-6); font-family: var(--mono); font-size: 13px; color: var(--text-900); background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-100); }
+.opt-ctl textarea { height: auto; padding: var(--sp-5) var(--sp-6); line-height: 18px; width: 100%; resize: vertical; }
+.opt-ctl input[type="text"] { width: 100%; max-width: 560px; }
+.opt-ctl input[type="number"] { width: 120px; text-align: right; font-variant-numeric: tabular-nums; }
+.opt-ctl select { min-width: 140px; }
+.opt-ctl input:focus, .opt-ctl select:focus, .opt-ctl textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+.pill { display: inline-flex; align-items: center; height: 16px; padding: 0px 6px; border-radius: var(--radius-pill); font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; background: var(--status-success-tint); color: var(--status-success-text); border: 1px solid var(--status-success); }
+.switch { display: inline-flex; align-items: center; gap: var(--sp-5); cursor: pointer; user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 0px; height: 0px; }
+.switch .track { position: relative; display: inline-block; width: 32px; height: 16px; border-radius: var(--radius-pill); background: var(--construction-300); transition: background var(--quick) var(--ease); }
+.switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: rgb(255, 255, 255); transition: transform var(--quick) var(--ease); }
+.switch input:checked + .track { background: var(--primary); }
+.switch input:checked + .track::after { transform: translateX(16px); }
+.switch input:focus-visible + .track { outline: 2px solid var(--primary); outline-offset: 2px; }
+.switch .st { font-size: 11px; letter-spacing: 0.2px; color: var(--text-600); }
+.switch.is-disabled { cursor: not-allowed; opacity: 0.55; }
+.switch input:disabled + .track { background: var(--construction-500); }
+.segbar { display: inline-flex; border: 1px solid var(--border-strong); border-radius: var(--radius-100); overflow: hidden; flex-wrap: wrap; }
+.segbar button { padding: 0px 10px; height: 30px; background: transparent; border: 0px; cursor: pointer; font-family: var(--font); font-size: 11px; font-weight: 600; letter-spacing: 0.2px; color: var(--text-600); transition: background var(--quick) var(--ease),color var(--quick) var(--ease); }
+.segbar button + button { border-left: 1px solid var(--border-strong); }
+.segbar button:hover { background: var(--surface-tint); color: var(--text-900); }
+.segbar button.on { background: var(--primary); color: rgb(255, 255, 255); }
+:root[data-theme="dark"] .segbar button.on { color: var(--construction-1000); }
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]) .segbar button.on { color: var(--construction-1000); }
+}
+.builder-out { position: sticky; top: calc(var(--header-h) + 16px); display: flex; flex-direction: column; gap: var(--sp-6); }
+.out-modes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-5); }
+.out-json { margin: 0px; padding: var(--sp-6); max-height: 520px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius-100); background: var(--surface-tint); font-family: var(--mono); font-size: 12px; line-height: 18px; color: var(--text-800); white-space: pre; }
+.out-count { font-size: 11px; letter-spacing: 0.2px; color: var(--text-600); }
+
+/* автономная страница: без шапки и боковой навигации */
+.builder-page{max-width:1240px;margin:0 auto}
+.builder-out{top:16px}
+
+</style>
+</head>
+<body>
+<main class="content builder-page">
+<section id="builder">
+      <div class="sec-head">
+        <div class="kicker">Backend</div>
+        <h2>Конструктор настроек прокторинга</h2>
+      </div>
+      <p>
+        Соберите конфигурацию переключателями — справа собирается готовый объект
+        <code>proctoring_settings</code>. Изменённые относительно значений по умолчанию параметры подсвечиваются.
+        Результат передаётся в <code>assignment.settings.proctoring_settings</code> тела запроса создания экзамена.
+      </p>
+
+      <div class="builder">
+        <div class="builder-panel">
+          <div class="presets">
+            <span>Пресеты</span>
+            <button class="btn btn-sm" type="button" data-preset="default">По умолчанию</button>
+            <button class="btn btn-sm" type="button" data-preset="basic">Базовый</button>
+            <button class="btn btn-sm" type="button" data-preset="strict">Строгий</button>
+            <button class="btn btn-sm" type="button" data-preset="max">Максимальный</button>
+          </div>
+          <div id="builderGroups"></div>
+        </div>
+
+        <div class="builder-out">
+          <div class="out-modes">
+            <button class="btn btn-sm" type="button" data-outmode="changed" aria-pressed="true">Только изменённое</button>
+            <button class="btn btn-sm" type="button" data-outmode="full" aria-pressed="false">Все поля</button>
+          </div>
+          <div class="code" style="background:var(--surface)">
+            <div class="code-bar">
+              <span>proctoring_settings</span>
+              <span class="spacer"></span>
+              <span class="out-count" id="outCount">полей: 0</span>
+              <button class="copy-btn" type="button" id="btnCopySettings">Копировать</button>
+            </div>
+            <pre class="out-json" id="outJson">{}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+<script>
+(function () {
+  'use strict';
+
+  function el(id) { return document.getElementById(id); }
+  function els(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+  var LANG = 'ru';
+  var STR = {
+    copied:     { ru: 'Скопировано' },
+    copy:       { ru: 'Копировать' },
+    settingsN:  { ru: 'полей: ' },
+    on:         { ru: 'включено' },
+    off:        { ru: 'выключено' },
+    defPrefix:  { ru: 'по умолч.' }
+  };
+  function T(k) { var s = STR[k]; return s ? (s[LANG] || s.ru) : k; }
+
+  function flash(btn) {
+    btn.textContent = T('copied');
+    btn.classList.add('done');
+    setTimeout(function () { btn.textContent = T('copy'); btn.classList.remove('done'); }, 1600);
+  }
+  function copyText(text, btn) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { if (btn) flash(btn); }, function () {});
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.copy-btn') : null;
+    if (!btn || btn.hasAttribute('data-custom-copy')) return;
+    var block = btn.closest('.code');
+    var pre = block && block.querySelector('pre');
+    if (pre) copyText(pre.innerText, btn);
+  });
+
+  /* =====================================================================
+     КОНСТРУКТОР НАСТРОЕК ПРОКТОРИНГА
+     ===================================================================== */
+  var GROUPS = [
+    { id: 'general',    title: 'Общие проверки' },
+    { id: 'media',      title: 'Камера, экран, микрофон' },
+    { id: 'identity',   title: 'Идентификация личности' },
+    { id: 'head',       title: 'Отслеживание головы' },
+    { id: 'vision',     title: 'Детекция взгляда и объектов' },
+    { id: 'audio',      title: 'Шум и речь' },
+    { id: 'tolerances', title: 'Допуски по времени' }
+  ];
+
+  var TRIPLETS = [
+    { id: 'main_camera',       label: 'Фронтальная камера', hint: 'Основной видеопоток пользователя. Источник для трекинга головы, биометрии и детекции объектов.' },
+    { id: 'screen_share',      label: 'Демонстрация экрана', hint: 'Захват экрана пользователя.' },
+    { id: 'second_camera',     label: 'Вторая камера',      hint: 'Дополнительный ракурс — обычно камера мобильного устройства, подключаемая по QR-коду.' },
+    { id: 'second_microphone', label: 'Второй микрофон',    hint: 'Внешний USB-микрофон. Используется детектором микронаушников.' }
+  ];
+
+  var TRIPLET_DEFAULTS = {
+    main_camera:       { record: true,  upload: false, blackhole: false },
+    screen_share:      { record: true,  upload: false, blackhole: false },
+    second_camera:     { record: true,  upload: false, blackhole: false },
+    second_microphone: { record: false, upload: false, blackhole: false }
+  };
+
+  var S = [
+    {k:'check_env', t:'bool', d:true, g:'general', l:'Проверка оборудования', h:'Мастер проверки камеры, микрофона, экрана и сети перед началом экзамена.'},
+    {k:'browser_type', t:'enum', d:'*', g:'general', l:'Допустимый браузер', h:'Ограничение на браузер. «*» — любой.', opts:['*','chrome','edge','opera','yandex']},
+    {k:'displays_check', t:'bool', d:true, g:'general', l:'Проверка числа мониторов', h:'Запрещает прохождение при нескольких подключённых дисплеях.'},
+    {k:'hdcp_check', t:'bool', d:false, g:'general', l:'Углублённая проверка дисплеев', h:'Детальная проверка подключённых мониторов и стриминговых сессий.'},
+    {k:'fullscreen_mode', t:'bool', d:true, g:'general', l:'Полноэкранный режим', h:'Требует работы в полноэкранном режиме; выход фиксируется событием.'},
+    {k:'focus_detector', t:'bool', d:true, g:'general', l:'Детектор потери фокуса', h:'Отслеживает переключение на другое окно или вкладку.'},
+    {k:'extension_detector', t:'bool', d:true, g:'general', l:'Поиск расширений браузера', h:'Ищет запрещённые расширения, способные помочь при списывании.'},
+    {k:'read_clipboard', t:'bool', d:false, g:'general', l:'Чтение буфера обмена', h:'Фиксирует содержимое буфера при копировании и вставке.'},
+    {k:'content_protect', t:'bool', d:false, g:'general', l:'Защита содержимого', h:'Защита от скриншотов и программ удалённого управления. Требует передачи protector.match на фронтенде.'},
+    {k:'proctoring_fallback_allow', t:'bool', d:false, g:'general', l:'Разрешить запасной режим', h:'Позволяет продолжить экзамен в упрощённом режиме, если часть детекторов не смогла запуститься.', isNew:true},
+    {k:'helper_widget', t:'bool', d:false, g:'general', l:'Виджет-помощник', h:'Встроенные инструменты для студента: черновик, калькулятор, таблица Менделеева.', isNew:true},
+    {k:'helper_widget_tools', t:'text', d:'draw,calculator,periodic-table', g:'general', l:'Инструменты виджета', h:'Список через запятую: draw, calculator, periodic-table.', isNew:true},
+
+    {k:'second_microphone_label', t:'text', d:'RubleffTechnology_UMdesktop|USB PnP Sound Device|USB PnP Sound Device|USB Audio Device|\\\\.*USB Audio Device', g:'media', l:'Маска названий второго микрофона', h:'Регулярное выражение: какие устройства считать допустимым вторым микрофоном.'},
+
+    {k:'id_verification', t:'bool', d:false, g:'identity', l:'Фото удостоверения личности', h:'Требует сфотографировать документ перед началом.'},
+    {k:'photo_head_identity', t:'bool', d:true, g:'identity', l:'Биометрия по фото', h:'Сверка лица с эталонным фото перед стартом и в ходе экзамена.'},
+    {k:'video_head_identity', t:'bool', d:false, g:'identity', l:'Идентификация по видео', h:'Проверка личности по видеопотоку.'},
+    {k:'luma_calibration', t:'bool', d:true, g:'identity', l:'Калибровка освещения', h:'Проверяет достаточность освещения лица перед стартом.', isNew:true},
+    {k:'face_liveness', t:'bool', d:false, g:'identity', l:'Проверка живого присутствия', h:'Активные челленджи — повернуть голову, моргнуть, выполнить действие в кадре.', isNew:true},
+    {k:'face_liveness_interval', t:'num', d:0, g:'identity', l:'Интервал челленджей, мс', h:'0 — только при старте.', isNew:true},
+    {k:'face_liveness_categories', t:'json', d:['frame-challenge','head-challenge','eye-challenge'], g:'identity', l:'Типы челленджей', h:'Массив строк. Единственная настройка-категория, которая является массивом.', isNew:true},
+
+    {k:'head_tracking_client', t:'bool', d:true, g:'head', l:'Анализ на устройстве пользователя', h:'Трекинг головы выполняется в браузере. Наименьшая нагрузка на сервер.'},
+    {k:'head_tracking_server_post', t:'bool', d:false, g:'head', hide:true, l:'Анализ на сервере после экзамена', h:'Видео анализируется после завершения попытки.'},
+    {k:'head_tracking_server_realtime', t:'bool', d:false, g:'head', hide:true, l:'Анализ на сервере в реальном времени', h:'Наиболее точный и наиболее ресурсоёмкий режим.'},
+    {k:'head_x_sensitivity', t:'num', d:50, g:'head', l:'Чувствительность по X, %', h:'Допустимый поворот головы влево-вправо.'},
+    {k:'head_y_sensitivity', t:'num', d:40, g:'head', l:'Чувствительность по Y, %', h:'Допустимый наклон вверх-вниз.'},
+    {k:'head_depth_sensitivity', t:'num', d:12, g:'head', l:'Чувствительность по глубине, %', h:'Допустимое приближение и отдаление от камеры.'},
+    {k:'head_center_area_size_x', t:'num', d:40, g:'head', l:'Ширина зоны центра, %', h:'Ширина области кадра, в которой должна находиться голова.'},
+    {k:'head_center_area_size_y', t:'num', d:30, g:'head', l:'Высота зоны центра, %', h:'Высота допустимой области кадра.'},
+    {k:'head_position_confidence', t:'num', d:0.5, g:'head', l:'Порог уверенности позиции', h:'Ниже порога кадр не учитывается.', step:0.05},
+    {k:'head_position_probability', t:'num', d:0.96, g:'head', l:'Вероятность корректного трекинга', h:'Порог достоверности определения головы.', step:0.01},
+    {k:'head_position_interval', t:'num', d:1200, g:'head', l:'Интервал проверки позиции, мс', h:'Как часто проверяется положение головы.'},
+    {k:'head_compare_interval', t:'num', d:4000, g:'head', l:'Интервал биометрии, мс', h:'Как часто лицо сверяется с эталонным фото.'},
+    {k:'head_compare_euclidean_distance', t:'num', d:0.5, g:'head', l:'Порог совпадения лиц', h:'Евклидово расстояние между дескрипторами. Меньше — строже.', step:0.05},
+
+    {k:'face_landmarker', t:'bool', d:false, g:'vision', l:'Отслеживание направления взгляда', h:'Фиксирует систематический увод глаз в сторону от экрана.'},
+    {k:'face_landmarker_interval', t:'num', d:700, g:'vision', l:'Интервал распознавания, мс', h:'Частота анализа лицевых меток.'},
+    {k:'face_landmarker_threshold', t:'num', d:0.5, g:'vision', l:'Порог уверенности', h:'Минимальная уверенность для фиксации метки.', step:0.05},
+    {k:'face_landmarker_calibration', t:'bool', d:false, g:'vision', l:'Калибровка взгляда', h:'Короткая калибровка перед стартом повышает точность.', isNew:true},
+    {k:'face_landmarker_categories', t:'json', d:{'eyeLookInLeft':{action:'eye-left',score:0.45},'eyeLookInRight':{action:'eye-right',score:0.45},'eyeLookUpLeft':{action:'eye-up',score:0.4},'eyeLookUpRight':{action:'eye-up',score:0.4},'eyeLookDownLeft':{action:'eye-down',score:0.4},'eyeLookDownRight':{action:'eye-down',score:0.4}}, g:'vision', l:'Категории движений глаз', h:'Объект: метка → действие и порог срабатывания.'},
+    {k:'object_detect', t:'bool', d:false, g:'vision', l:'Детекция объектов', h:'Поиск в кадре телефона, ноутбука, наушников, второго человека.'},
+    {k:'object_detect_interval', t:'num', d:2000, g:'vision', l:'Интервал анализа, мс', h:'Частота прогона детектора объектов.'},
+    {k:'object_detect_threshold', t:'num', d:0.5, g:'vision', l:'Порог уверенности', h:'Минимальная уверенность для фиксации объекта.', step:0.05},
+    {k:'object_detect_categories', t:'json', d:{'earphone':{action:'object-detected',score:0.4,count:1},'cell phone':{action:'object-detected',score:0.4,count:1},'remote':{action:'object-detected',score:0.4,count:1},'laptop':{action:'object-detected',score:0.4,count:1},'person':{action:'head-many',score:0.7,count:2}}, g:'vision', l:'Отслеживаемые объекты', h:'Объект: класс → действие, порог и минимальное количество в кадре. Класс earphone распознаётся только клиентской моделью.'},
+
+    {k:'noise_detector', t:'bool', d:true, g:'audio', l:'Анализ шума', h:'Фиксирует посторонние звуки в помещении.'},
+    {k:'speech_detector', t:'bool', d:true, g:'audio', l:'Распознавание речи', h:'Отличает речь от фонового шума и фиксирует разговоры.'},
+    {k:'noise_sensitivity', t:'num', d:10, g:'audio', l:'Чувствительность к шуму', h:'Больше значение — выше чувствительность.'},
+    {k:'noise_tolerance_frames', t:'num', d:3, g:'audio', l:'Допустимо шумных кадров подряд', h:'Сколько подряд идущих шумных кадров игнорировать.'},
+    {k:'mute_frames_count', t:'num', d:30, g:'audio', l:'Кадров для фиксации тишины', h:'Число кадров, считающихся тишиной.'},
+    {k:'quite_frames_count', t:'num', d:30, g:'audio', l:'Кадров тихого фона', h:'Порог для определения тихого фона.', isNew:true},
+    {k:'speech_min_frames_count', t:'num', d:5, g:'audio', l:'Мин. кадров речи', h:'Минимальная длительность речи для фиксации события.'},
+    {k:'speech_pre_pad_frames', t:'num', d:10, g:'audio', l:'Кадров до речи в записи', h:'Сколько кадров перед распознанной речью включить в фрагмент.'},
+    {k:'speech_positive_threshold', t:'num', d:0.9, g:'audio', l:'Порог уверенности речи', h:'Уверенность, что распознана именно речь.', step:0.05},
+
+    {k:'noise_tolerance_seconds', t:'num', d:1500, g:'tolerances', l:'Допустимое время шума, с', h:'Суммарная длительность шума, после которой событие становится нарушением.'},
+    {k:'speech_tolerance_seconds', t:'num', d:1500, g:'tolerances', l:'Допустимое время речи, с', h:'Суммарная длительность речи.'},
+    {k:'silent_tolerance_seconds', t:'num', d:1500, g:'tolerances', l:'Допустимое время полной тишины, с', h:'Тишина может означать отключённый микрофон.'},
+    {k:'head_tolerance_seconds', t:'num', d:1500, g:'tolerances', l:'Допустимое время вне зоны, с', h:'Суммарное время нахождения головы вне допустимой области.'},
+    {k:'focus_tolerance_seconds', t:'num', d:1500, g:'tolerances', l:'Допустимое время без фокуса, с', h:'Суммарное время, когда окно экзамена не в фокусе.'}
+  ];
+
+  var PRESETS = {
+    'default': {},
+    basic: {
+      photo_head_identity: false, noise_detector: false, speech_detector: false, extension_detector: false,
+      _triplets: { main_camera:'streaming', screen_share:'disabled', second_camera:'disabled', second_microphone:'disabled' }
+    },
+    strict: {
+      object_detect: true, face_landmarker: true, id_verification: true, read_clipboard: true, hdcp_check: true,
+      _triplets: { main_camera:'recording', screen_share:'recording', second_camera:'streaming', second_microphone:'disabled' }
+    },
+    max: {
+      object_detect: true, face_landmarker: true, face_liveness: true,
+      id_verification: true, video_head_identity: true, read_clipboard: true, hdcp_check: true,
+      content_protect: true, head_tracking_server_realtime: true, head_tracking_client: false,
+      _triplets: { main_camera:'recording', screen_share:'recording', second_camera:'recording', second_microphone:'recording' }
+    }
+  };
+
+  var MODE_LABEL = {
+    disabled:  { ru: 'Выкл',     en: 'Off' },
+    streaming: { ru: 'Стриминг', en: 'Streaming' },
+    recording: { ru: 'Запись',   en: 'Recording' },
+    blackhole: { ru: 'Имитация', en: 'Simulated' }
+  };
+
+  var state = { settings: {}, triplets: {}, outMode: 'changed' };
+
+  function modeFromTriplet(v) {
+    if (v.blackhole) return 'blackhole';
+    if (v.upload) return 'recording';
+    if (v.record) return 'streaming';
+    return 'disabled';
+  }
+  function tripletFromMode(mode) {
+    if (mode === 'streaming') return { record:true, upload:false, blackhole:false };
+    if (mode === 'recording') return { record:false, upload:true, blackhole:false };
+    if (mode === 'blackhole') return { record:false, upload:false, blackhole:true };
+    return { record:false, upload:false, blackhole:false };
+  }
+  function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function resetState() {
+    state.settings = {};
+    S.forEach(function (s) { state.settings[s.k] = s.d; });
+    TRIPLETS.forEach(function (t) { state.triplets[t.id] = modeFromTriplet(TRIPLET_DEFAULTS[t.id]); });
+  }
+  resetState();
+
+  function changedSettings() {
+    var out = {};
+    S.forEach(function (s) {
+      if (!eq(state.settings[s.k], s.d)) out[s.k] = state.settings[s.k];
+    });
+    TRIPLETS.forEach(function (t) {
+      var cur = tripletFromMode(state.triplets[t.id]), def = TRIPLET_DEFAULTS[t.id];
+      if (cur.record !== def.record) out[t.id + '_record'] = cur.record;
+      if (cur.upload !== def.upload) out[t.id + '_upload'] = cur.upload;
+      if (cur.blackhole !== def.blackhole) out[t.id + '_blackhole'] = cur.blackhole;
+    });
+    return out;
+  }
+  function allSettings() {
+    var out = {};
+    TRIPLETS.forEach(function (t) {
+      var cur = tripletFromMode(state.triplets[t.id]);
+      out[t.id + '_record'] = cur.record;
+      out[t.id + '_upload'] = cur.upload;
+      out[t.id + '_blackhole'] = cur.blackhole;
+    });
+    S.forEach(function (s) { out[s.k] = state.settings[s.k]; });
+    return out;
+  }
+  function currentSettings() {
+    return state.outMode === 'full' ? allSettings() : changedSettings();
+  }
+
+  var builderGroups = el('builderGroups');
+  var openGroups = { general: true };
+
+  function defLabel(v) {
+    if (typeof v === 'object') return 'JSON';
+    return String(v);
+  }
+
+  function renderBuilder() {
+    var html = '';
+    GROUPS.forEach(function (g) {
+      var items = S.filter(function (s) { return s.g === g.id && !s.hide; });
+      var count = items.length + (g.id === 'media' ? TRIPLETS.length : 0);
+      html += '<div class="group' + (openGroups[g.id] ? ' open' : '') + '" data-group="' + g.id + '">';
+      html += '<button class="group-head" type="button"><span class="chev" data-no-i18n>&#9654;</span>'
+           + esc(g.title) + '<span class="cnt" data-no-i18n>' + count + '</span></button>';
+      html += '<div class="group-body">';
+
+      if (g.id === 'media') {
+        TRIPLETS.forEach(function (t) {
+          var mode = state.triplets[t.id];
+          var changed = mode !== modeFromTriplet(TRIPLET_DEFAULTS[t.id]);
+          html += '<div class="opt' + (changed ? ' changed' : '') + '" data-triplet="' + t.id + '">'
+               + '<div class="opt-top"><span class="opt-key" data-no-i18n>' + t.id + '_*</span>'
+               + '<span class="opt-type">режим</span>'
+               + '<span class="opt-def">' + T('defPrefix') + ' <span data-no-i18n>'
+               + esc(MODE_LABEL[modeFromTriplet(TRIPLET_DEFAULTS[t.id])][LANG]) + '</span></span></div>'
+               + '<div class="opt-label">' + esc(t.label) + '</div>'
+               + '<div class="opt-hint">' + esc(t.hint) + '</div>'
+               + '<div class="opt-ctl"><div class="segbar" data-seg="' + t.id + '">'
+               + ['disabled','streaming','recording','blackhole'].map(function (v) {
+                   return '<button type="button" data-v="' + v + '"' + (v === mode ? ' class="on"' : '') + '>'
+                        + esc(MODE_LABEL[v][LANG]) + '</button>';
+                 }).join('')
+               + '</div></div></div>';
+        });
+      }
+
+      items.forEach(function (s) {
+        var v = state.settings[s.k];
+        var changed = !eq(v, s.d);
+        var ctl = '';
+        var dis = s.dis ? ' disabled' : '';
+        if (s.t === 'bool') {
+          ctl = '<label class="switch' + (s.dis ? ' is-disabled' : '') + '"><input type="checkbox" data-in="' + s.k + '"'
+              + (v ? ' checked' : '') + dis
+              + '><span class="track"></span><span class="st">' + (v ? T('on') : T('off')) + '</span></label>';
+        } else if (s.t === 'enum') {
+          ctl = '<select data-in="' + s.k + '"' + dis + '>' + s.opts.map(function (o) {
+            return '<option value="' + esc(o) + '"' + (o === v ? ' selected' : '') + ' data-no-i18n>' + esc(o) + '</option>';
+          }).join('') + '</select>';
+        } else if (s.t === 'num') {
+          ctl = '<input type="number" data-in="' + s.k + '" value="' + esc(v) + '"'
+              + (s.step ? ' step="' + s.step + '"' : '') + dis + '>';
+        } else if (s.t === 'json') {
+          ctl = '<textarea data-in="' + s.k + '" rows="4" spellcheck="false"' + dis + '>' + esc(JSON.stringify(v)) + '</textarea>';
+        } else {
+          ctl = '<input type="text" data-in="' + s.k + '" value="' + esc(v) + '" spellcheck="false"' + dis + '>';
+        }
+        html += '<div class="opt' + (changed ? ' changed' : '') + '" data-opt="' + s.k + '">'
+             + '<div class="opt-top"><span class="opt-key" data-no-i18n>' + s.k + '</span>'
+             + '<span class="opt-type" data-no-i18n>' + s.t + '</span>'
+             + (s.isNew ? '<span class="pill">' + (LANG === 'en' ? 'new' : 'новое') + '</span>' : '')
+             + '<span class="opt-def">' + T('defPrefix') + ' <span data-no-i18n>' + esc(defLabel(s.d)) + '</span></span></div>'
+             + '<div class="opt-label">' + esc(s.l) + '</div>'
+             + '<div class="opt-hint">' + esc(s.h) + '</div>'
+             + '<div class="opt-ctl">' + ctl + '</div></div>';
+      });
+
+      html += '</div></div>';
+    });
+    builderGroups.innerHTML = html;
+    renderOut();
+  }
+
+  function renderOut() {
+    var obj = currentSettings();
+    el('outJson').textContent = JSON.stringify(obj, null, 2);
+    el('outCount').textContent = T('settingsN') + Object.keys(obj).length;
+  }
+
+  builderGroups.addEventListener('click', function (e) {
+    var head = e.target.closest('.group-head');
+    if (head) {
+      var g = head.parentNode.getAttribute('data-group');
+      openGroups[g] = !head.parentNode.classList.contains('open');
+      head.parentNode.classList.toggle('open');
+      return;
+    }
+    var seg = e.target.closest('.segbar button');
+    if (seg) {
+      var id = seg.parentNode.getAttribute('data-seg');
+      state.triplets[id] = seg.getAttribute('data-v');
+      renderBuilder();
+    }
+  });
+
+  builderGroups.addEventListener('change', function (e) {
+    var inp = e.target.closest('[data-in]');
+    if (!inp) return;
+    var key = inp.getAttribute('data-in');
+    var s = S.filter(function (x) { return x.k === key; })[0];
+    if (!s || s.dis) return;
+    if (s.t === 'bool') state.settings[key] = inp.checked;
+    else if (s.t === 'num') state.settings[key] = Number(inp.value);
+    else if (s.t === 'json') {
+      try { state.settings[key] = JSON.parse(inp.value); } catch (err) { return; }
+    } else state.settings[key] = inp.value;
+    renderBuilder();
+  });
+
+  els('[data-preset]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var p = PRESETS[btn.getAttribute('data-preset')];
+      resetState();
+      Object.keys(p).forEach(function (k) {
+        if (k === '_triplets') {
+          Object.keys(p._triplets).forEach(function (id) { state.triplets[id] = p._triplets[id]; });
+        } else {
+          var sd = S.filter(function (x) { return x.k === k; })[0];
+          if (sd && sd.dis) return;
+          state.settings[k] = p[k];
+        }
+      });
+      renderBuilder();
+    });
+  });
+
+  els('[data-outmode]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.outMode = btn.getAttribute('data-outmode');
+      els('[data-outmode]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      renderOut();
+    });
+  });
+
+
+  renderBuilder();
+})();
+</script>
+</body>
+</html>
